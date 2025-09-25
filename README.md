@@ -13,7 +13,7 @@
 | Midbrain         | Attention, arousal       | Sensory stimuli, reward signals    | Focused attention, arousal level    | Acetylcholine, Dopamine                 |
 | Brainstem        | Vital functions          | Breathing, heart rate signals      | Autonomic control signals           | Serotonin, Norepinephrine               |
 
-
+```
 project/
 │
 ├── kalman_filter.py
@@ -31,3 +31,4 @@ project/
 ├── auditory_cortex.py
 │
 └── simulate_brain_activity.py
+```
