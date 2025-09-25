@@ -94,7 +94,9 @@ def simulate_brain_activity(input_signal, neurotransmitters, external_stimuli, i
 
         visual_vs_language = abs(outputs["Visual Cortex"] - outputs["Language Area"])
         auditory_vs_language = abs(outputs["Auditory Cortex"] - outputs["Language Area"])
-        olfactory_response = outputs["Olfactory Cortex"][0] if isinstance(outputs["Olfactory Cortex"], np.ndarray) else outputs["Olfactory Cortex"]
+        olfactory_response = outputs["Olfactory Cortex"]
+        if isinstance(olfactory_response, list):
+            olfactory_response = olfactory_response[0]
 
         if max(visual_vs_language, auditory_vs_language) > discrepancy_threshold:
             escape_counter += 1
