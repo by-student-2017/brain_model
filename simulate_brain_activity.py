@@ -1,3 +1,5 @@
+# simulate_brain_activity_fixed.py
+
 import numpy as np
 import json
 import matplotlib.pyplot as plt
@@ -28,9 +30,8 @@ external_stimuli = config["external_stimuli"]
 image_signals = config["image_signals"]
 linguistic_inputs = config["linguistic_inputs"]
 auditory_inputs = config["auditory_inputs"]
-olfactory_inputs = config["olfactory_inputs"]  # e.g., moldy smell
+olfactory_inputs = config["olfactory_inputs"]
 
-# === Simulation Function with Kalman Filter Integration and Emotion Modeling ===
 def simulate_brain_activity(input_signal, neurotransmitters, external_stimuli, internal_state,
                             image_signals=None, linguistic_inputs=None, auditory_inputs=None, olfactory_inputs=None,
                             dt=0.1, steps=10, discrepancy_threshold=0.5, escape_duration=3):
@@ -93,21 +94,25 @@ def simulate_brain_activity(input_signal, neurotransmitters, external_stimuli, i
             else:
                 outputs[region.name] = region.process(input_signal, neurotransmitters, internal_state)
 
-        visual_vs_language = abs(outputs["Visual Cortex"] - outputs["Language Area"])
-        auditory_vs_language = abs(outputs["Auditory Cortex"] - outputs["Language Area"])
+        visual_vs_language = float(np.linalg.norm(np.array(outputs["Visual Cortex"]) - np.array(outputs["Language Area"])))
+        auditory_vs_language = float(np.linalg.norm(np.array(outputs["Auditory Cortex"]) - np.array(outputs["Language Area"])))
         olfactory_response = outputs["Olfactory Cortex"]
         if isinstance(olfactory_response, list):
             olfactory_response = olfactory_response[0]
 
-        # Emotion state modeling
-        emotion_state = {
-            "fear": outputs["Amygdala"],
-            "pleasure": neurotransmitters["dopamine"],
-            "disgust": olfactory_response,
-            "anger": max(0.0, visual_vs_language - 0.5)
-        }
+        prefrontal_output = outputs["Prefrontal Cortex"]
+        if isinstance(prefrontal_output, (list, np.ndarray)):
+            prefrontal_output = float(prefrontal_output[0])
+        else:
+            prefrontal_output = float(prefrontal_output)
 
-        if max(visual_vs_language, auditory_vs_language) > discrepancy_threshold:
+        adaptive_threshold = discrepancy_threshold \
+            + 0.2 * prefrontal_output \
+            + 0.3 * (neurotransmitters["serotonin"] - 0.5) \
+            - 0.1 * np.exp(-escape_counter)
+
+        discrepancy_value = max(visual_vs_language, auditory_vs_language)
+        if discrepancy_value > adaptive_threshold:
             escape_counter += 1
         else:
             escape_counter = 0
@@ -136,11 +141,18 @@ def simulate_brain_activity(input_signal, neurotransmitters, external_stimuli, i
 
         input_signal = outputs["Hippocampus"] * dt + input_signal * (1 - dt)
 
+        emotion_state = {
+            "fear": outputs["Amygdala"],
+            "pleasure": neurotransmitters["dopamine"],
+            "disgust": olfactory_response,
+            "anger": max(0.0, visual_vs_language - 0.5)
+        }
+
         time_series.append(time)
         visual_language_discrepancy.append(visual_vs_language)
         auditory_language_discrepancy.append(auditory_vs_language)
         olfactory_discomfort.append(olfactory_response)
-        feedback_intensity.append(max(visual_vs_language, auditory_vs_language, olfactory_response))
+        feedback_intensity.append(discrepancy_value)
         emotion_states.append(emotion_state)
 
     homunculus_feedback = {
