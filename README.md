@@ -1,4 +1,6 @@
-# brain_model# This table summarizes the major brain regions, their primary functions, typical input and output information, and associated neurotransmitters. It serves as a foundation for constructing simplified mathematical models of brain function.
+# brain_model
+
+## This table summarizes the major brain regions, their primary functions, typical input and output information, and associated neurotransmitters. It serves as a foundation for constructing simplified mathematical models of brain function.
 
 | Brain Region     | Primary Function         | Input Information                  | Output Information                  | Related Neurotransmitters               |
 |------------------|--------------------------|------------------------------------|-------------------------------------|-----------------------------------------|
