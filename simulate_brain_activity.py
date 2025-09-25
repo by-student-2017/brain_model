@@ -16,7 +16,7 @@ from brainstem import Brainstem
 from visual_cortex import VisualCortex
 from language_area import LanguageArea
 from auditory_cortex import AuditoryCortex
-from olfactory_cortex import OlfactoryCortex  # 嗅覚処理を追加
+from olfactory_cortex import OlfactoryCortex  # Olfactory processing
 
 # Load configuration from config.json
 with open("config.json", "r") as f:
@@ -28,9 +28,9 @@ external_stimuli = config["external_stimuli"]
 image_signals = config["image_signals"]
 linguistic_inputs = config["linguistic_inputs"]
 auditory_inputs = config["auditory_inputs"]
-olfactory_inputs = config["olfactory_inputs"]  # カビ臭さなど
+olfactory_inputs = config["olfactory_inputs"]  # e.g., moldy smell
 
-# === Simulation Function with Kalman Filter Integration and Escape Mode ===
+# === Simulation Function with Kalman Filter Integration and Emotion Modeling ===
 def simulate_brain_activity(input_signal, neurotransmitters, external_stimuli, internal_state,
                             image_signals=None, linguistic_inputs=None, auditory_inputs=None, olfactory_inputs=None,
                             dt=0.1, steps=10, discrepancy_threshold=0.5, escape_duration=3):
@@ -61,6 +61,7 @@ def simulate_brain_activity(input_signal, neurotransmitters, external_stimuli, i
     auditory_language_discrepancy = []
     olfactory_discomfort = []
     feedback_intensity = []
+    emotion_states = []
 
     escape_counter = 0
 
@@ -98,6 +99,14 @@ def simulate_brain_activity(input_signal, neurotransmitters, external_stimuli, i
         if isinstance(olfactory_response, list):
             olfactory_response = olfactory_response[0]
 
+        # Emotion state modeling
+        emotion_state = {
+            "fear": outputs["Amygdala"],
+            "pleasure": neurotransmitters["dopamine"],
+            "disgust": olfactory_response,
+            "anger": max(0.0, visual_vs_language - 0.5)
+        }
+
         if max(visual_vs_language, auditory_vs_language) > discrepancy_threshold:
             escape_counter += 1
         else:
@@ -132,13 +141,15 @@ def simulate_brain_activity(input_signal, neurotransmitters, external_stimuli, i
         auditory_language_discrepancy.append(auditory_vs_language)
         olfactory_discomfort.append(olfactory_response)
         feedback_intensity.append(max(visual_vs_language, auditory_vs_language, olfactory_response))
+        emotion_states.append(emotion_state)
 
     homunculus_feedback = {
         "time": time_series,
         "visual_language_discrepancy": visual_language_discrepancy,
         "auditory_language_discrepancy": auditory_language_discrepancy,
         "olfactory_discomfort": olfactory_discomfort,
-        "feedback_intensity": feedback_intensity
+        "feedback_intensity": feedback_intensity,
+        "emotion_states": emotion_states
     }
 
     with open("homunculus_feedback.json", "w") as f:
