@@ -19,6 +19,7 @@ from visual_cortex import VisualCortex
 from language_area import LanguageArea
 from auditory_cortex import AuditoryCortex
 from olfactory_cortex import OlfactoryCortex  # Olfactory processing
+from insula import Insula
 
 # Load configuration from config.json
 with open("config.json", "r") as f:
@@ -47,7 +48,8 @@ def simulate_brain_activity(input_signal, neurotransmitters, external_stimuli, i
         VisualCortex("Visual Cortex"),
         LanguageArea("Language Area"),
         AuditoryCortex("Auditory Cortex"),
-        OlfactoryCortex("Olfactory Cortex")
+        OlfactoryCortex("Olfactory Cortex"),
+        Insula("Insula")
     ]
 
     kf = KalmanFilter(
@@ -91,8 +93,14 @@ def simulate_brain_activity(input_signal, neurotransmitters, external_stimuli, i
                 outputs[region.name] = region.process(auditory_input, neurotransmitters, internal_state)
             elif region.name == "Olfactory Cortex":
                 outputs[region.name] = region.process(olfactory_input, neurotransmitters, internal_state)
+            elif region.name == "Insula":
+                observed_pain_signal = {"pain": 0.6, "distress": 0.4}  # 仮の入力
+                outputs[region.name] = region.process(observed_pain_signal, internal_state)
             else:
                 outputs[region.name] = region.process(input_signal, neurotransmitters, internal_state)
+
+        observed_pain_signal = {"pain": 0.6, "distress": 0.4} # 仮の入力
+        insula_output = outputs["Insula"] = regions[-1].process(observed_pain_signal, internal_state)
 
         visual_vs_language = float(np.linalg.norm(np.array(outputs["Visual Cortex"]) - np.array(outputs["Language Area"])))
         auditory_vs_language = float(np.linalg.norm(np.array(outputs["Auditory Cortex"]) - np.array(outputs["Language Area"])))
@@ -145,7 +153,8 @@ def simulate_brain_activity(input_signal, neurotransmitters, external_stimuli, i
             "fear": outputs["Amygdala"],
             "pleasure": neurotransmitters["dopamine"],
             "disgust": olfactory_response,
-            "anger": max(0.0, visual_vs_language - 0.5)
+            "anger": max(0.0, visual_vs_language - 0.5),
+            "empathy": insula_output
         }
 
         time_series.append(time)
