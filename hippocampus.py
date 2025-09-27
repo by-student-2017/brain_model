@@ -4,7 +4,8 @@ from brain_region_base import BrainRegion
 class Hippocampus(BrainRegion):
     def __init__(self, name):
         super().__init__(name)
-        self.memory_buffer = []
+        self.memory_buffer = []  # 短期記憶領域
+        self.long_term_memory = []  # 長期記憶領域（定着用）
 
     def process(self, input_signal, neurotransmitters, internal_state=None):
         # === 生理学的忠実性 ===
@@ -52,5 +53,17 @@ class Hippocampus(BrainRegion):
         # - 方位ベクトル（head-direction）と匂い強度・種類による空間文脈処理
         # - 時系列データによるエピソード記憶の構造化（sequence modeling）
 
+        # === 短期記憶への保存 ===
         self.memory_buffer.append(memory_trace)
+
+        # === 将来的な拡張：短期→長期記憶への移行 ===
+        # - 刺激強度と回数に基づいて定着処理を追加可能
+        if glutamate * acetylcholine > 1.5 and len(self.memory_buffer) > 5:
+            self.consolidate_memory(memory_trace)
+
         return memory_trace
+
+    def consolidate_memory(self, trace):
+        # === 長期記憶への保存処理（定着） ===
+        self.long_term_memory.append(trace)
+        # 将来的には記憶の再構成や検索エンジンと連携可能
