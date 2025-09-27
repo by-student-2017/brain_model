@@ -33,6 +33,9 @@ class PrefrontalCortex(BrainRegion):
           the left lateral posterior ventral area is critical for switching classification rules, while the frontopolar cortex
           (prefrontal pole) is important for suppressing responses based on outdated rules. Primate studies show that neurons
           in these regions encode the current rule and evaluate feedback (correct vs incorrect), supporting flexible behavior.
+        - The orbitofrontal cortex (BA11) is involved in value-based decision-making and reward evaluation. It modulates
+          the relative weighting of expected outcomes and adjusts behavioral strategies accordingly. Dysfunction in BA11
+          may lead to fixed reward sensitivity, impairing adaptive learning and reverse updating of value representations.
 
         Future Extensions:
         ------------------
@@ -40,6 +43,7 @@ class PrefrontalCortex(BrainRegion):
         - Model D1 receptor-specific modulation and inverse-U shaped performance curves.
         - Simulate genetic variability (e.g., COMT polymorphisms) and pharmacological interventions.
         - Implement rule switching and response inhibition mechanisms based on lateral and frontopolar prefrontal subregions.
+        - Add orbitofrontal (BA11) module to simulate value ratio adjustment and feedback-based learning flexibility.
         """
 
         # Retrieve neurotransmitter levels with default values
@@ -47,9 +51,11 @@ class PrefrontalCortex(BrainRegion):
         glutamate = neurotransmitters.get('glutamate', 1.0)
 
         # Modulate input signal based on neurotransmitter levels
+        # Dopamine and glutamate jointly influence signal strength and cortical responsiveness
         weighted_input = np.array(input_signal) * dopamine * glutamate
 
-        # Apply exponential transformation and normalize
+        # Apply exponential transformation to simulate nonlinear neural activation
         exp_input = np.exp(weighted_input)
-        
+
+        # Normalize to simulate competitive encoding and probabilistic output
         return exp_input / np.sum(exp_input)
