@@ -3,7 +3,6 @@ from brain_region_base import BrainRegion
 
 class Midbrain(BrainRegion):
     def process(self, input_signal, neurotransmitters, internal_state=None):
-
         """
         中脳（Midbrain）による入力信号の処理を模擬するメソッド。
 
