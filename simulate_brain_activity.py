@@ -36,6 +36,58 @@ olfactory_inputs = config["olfactory_inputs"]
 def simulate_brain_activity(input_signal, neurotransmitters, external_stimuli, internal_state,
                             image_signals=None, linguistic_inputs=None, auditory_inputs=None, olfactory_inputs=None,
                             dt=0.1, steps=10, discrepancy_threshold=0.5, escape_duration=3):
+    """
+    脳活動のシミュレーションを行う統合関数。
+
+    将来的な拡張ポイント：
+    ============================
+
+    1. 入力信号の多様化とモダリティ統合：
+       - image_signals, linguistic_inputs, auditory_inputs, olfactory_inputs に加えて、
+         触覚、味覚、内臓感覚などの入力モジュールを追加可能。
+       - 各モダリティを統合する「感覚統合モジュール（Sensory Integration）」の導入。
+
+    2. 内部状態の拡張：
+       - internal_state に「睡眠状態」「疲労度」「ホルモン濃度」「免疫反応」などを追加。
+       - 情動状態や報酬履歴を保持することで、学習と行動選択に反映可能。
+
+    3. 社会的文脈の導入：
+       - 他者の信頼度、関係性、集団所属などを social_context として扱い、
+         Insula や Amygdala の処理に反映。
+       - 共感、羞恥、罪悪感などの高次情動の生成に活用。
+
+    4. 脳領域間の接続構造の明示化：
+       - 各 BrainRegion を接続グラフとして定義し、信号の流れを動的に制御。
+       - 例：海馬 → 前頭前野 → 線条体 → 運動出力 などの経路を構築。
+
+    5. 学習機構の統合：
+       - KalmanFilter に加えて、強化学習（Q学習、TD誤差）、ベイズ推定、Hebbian学習などを導入。
+       - 報酬予測誤差に基づく神経伝達物質の動的調整。
+
+    6. 記憶検索と再構成：
+       - Hippocampus に MemorySearchEngine を追加し、過去の痕跡との照合と再構成を実装。
+       - 類似記憶の再活性化による予測と行動選択の強化。
+
+    7. 情動処理の高度化：
+       - Amygdala に高次情動（尊敬、感謝、羞恥、罪悪感など）を追加。
+       - Insula に社会的共感の時系列追跡機能を追加。
+
+    8. 行動選択と運動出力の統合：
+       - 線条体、前頭前野、視床、運動皮質などを連携させ、意思決定から運動出力までをモデル化。
+       - escape_counter による逃避行動を、より複雑な行動選択に拡張。
+
+    9. ホムンクルスフィードバックの視覚化：
+       - homunculus_feedback を用いて、脳領域ごとの活動マップや情動マップを描画。
+       - 時系列での情動変化や認知的不一致の推移を可視化。
+
+    10. 実験データとの整合性：
+        - fMRI、EEG、行動課題データとの対応を考慮したパラメータ設計。
+        - 実験条件に応じた入力・内部状態の切り替え機能を追加。
+
+    この関数は、脳モデルの統合的なシミュレーション基盤として設計されており、
+    各モジュールの拡張と連携によって、より高度な認知・情動・行動モデルへと発展可能である。
+    """
+
     regions = [
         PrefrontalCortex("Prefrontal Cortex"),
         Striatum("Striatum"),

@@ -4,12 +4,13 @@ from brain_region_base import BrainRegion
 class Hippocampus(BrainRegion):
     def __init__(self, name):
         super().__init__(name)
-        self.memory_buffer = []  # 短期記憶領域
-        self.long_term_memory = []  # 長期記憶領域（定着用）
+        self.memory_buffer = []        # 短期記憶領域（作業記憶や一時的な痕跡）
+        self.long_term_memory = []     # 長期記憶領域（定着されたエピソード記憶）
 
     def process(self, input_signal, neurotransmitters, internal_state=None):
         # === 生理学的忠実性 ===
         # 基本的な伝達物質の影響（グルタミン酸とアセチルコリン）
+        # グルタミン酸（興奮性）とアセチルコリン（注意・記憶形成）による記憶痕跡の形成
         glutamate = neurotransmitters.get('glutamate', 1.0)
         acetylcholine = neurotransmitters.get('acetylcholine', 1.0)
 
@@ -58,6 +59,7 @@ class Hippocampus(BrainRegion):
 
         # === 将来的な拡張：短期→長期記憶への移行 ===
         # - 刺激強度と回数に基づいて定着処理を追加可能
+        # - 睡眠や再活性化による定着モデルも導入可能
         if glutamate * acetylcholine > 1.5 and len(self.memory_buffer) > 5:
             self.consolidate_memory(memory_trace)
 
@@ -67,3 +69,7 @@ class Hippocampus(BrainRegion):
         # === 長期記憶への保存処理（定着） ===
         self.long_term_memory.append(trace)
         # 将来的には記憶の再構成や検索エンジンと連携可能
+
+        # === 将来的な拡張：記憶の再構成や検索エンジンとの連携 ===
+        # - 類似記憶との照合による再構成（reconstruction）
+        # - 記憶の強度や文脈に応じた検索優先度の調整
