@@ -3,7 +3,6 @@ from brain_region_base import BrainRegion
 
 class Hypothalamus(BrainRegion):
     def process(self, input_signal, neurotransmitters, internal_state):
-
         """
         視床下部（Hypothalamus）による入力信号の処理を模擬するメソッド。
 
