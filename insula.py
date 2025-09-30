@@ -17,79 +17,81 @@ Key Features:
 
 import numpy as np
 from brain_region_base import BrainRegion
-"""
-Insula class models the neural mechanisms of empathy-based altruistic behavior.
 
-概要：
-----------------------------
-- 島皮質（Insula）は、自己の身体状態と他者の感情状態を統合することで、
-  共感に基づく利他的行動を促進する脳領域。
-- 本クラスは、観察された痛み信号（他者の苦痛）と自己の内部状態（例：自身の痛み、ストレス）を統合し、
-  扁桃体への情動出力として共感強度を生成する。
-- 短期記憶（STP）と長期記憶（LTP）を用いて、共感反応の学習と蓄積を可能にする。
-- 将来的な拡張として、強化学習、社会的文脈の統合、時間的変化の追跡などに対応可能。
-
-主な機能：
-----------------------------
-- 観察された痛み信号に基づく共感処理
-- 内部状態（自身の痛み、ストレスなど）との統合
-- 共感強度の調整と扁桃体への出力
-- STP（短期共感記憶）とLTP（長期共感記憶）の更新
-- 拡張性の高いアーキテクチャ設計
-
-拡張ポイント：
-============================
-
-1. 強化学習による共感重みの調整：
-   - empathy_weights を報酬に基づいて動的に更新し、社会的報酬に応じた共感反応を学習。
-   - 例：
-     ```python
-     reward = social_feedback.get('altruism_reward', 0.0)
-     self.empathy_weights['pain'] += alpha * (reward - self.empathy_weights['pain'])
-     ```
-
-2. 時系列共感応答の追跡：
-   - 共感反応を時間軸で記録し、共感の持続性や変化をモデル化。
-   - 例：
-     ```python
-     self.empathy_history.append((timestamp, empathy_output))
-     ```
-
-3. 社会的文脈の統合：
-   - social_context に「関係性」「集団所属」「親密度」などを含め、共感強度を調整。
-   - 例：
-     ```python
-     familiarity = social_context.get('familiarity', 1.0)
-     empathy_signal *= familiarity
-     ```
-
-4. 扁桃体・前頭前野との接続：
-   - 扁桃体への情動出力、前頭前野による行動制御との連携を設計。
-   - 例：
-     ```python
-     amygdala_input = self.process(...)  # 情動強度
-     prefrontal_modulation = prefrontal_cortex.decide_action(amygdala_input)
-     ```
-
-5. 共感カテゴリの拡張：
-   - pain, distress 以外にも「羞恥」「罪悪感」「感謝」などの高次共感カテゴリを追加。
-   - 例：
-     ```python
-     self.empathy_weights['guilt'] = 1.0
-     ```
-
-6. 実験データとの整合性：
-   - fMRI、皮膚電気反応、表情認識などの生理・行動データと対応する共感強度の調整。
-   - 例：
-     ```python
-     if internal_state.get('SCR') > threshold:
-         empathy_output *= 1.2
-     ```
-
-このクラスは、神経科学的に忠実な共感処理モデルとして、社会的・倫理的・文化的な文脈を含む
-高度な利他行動の生成に対応可能な設計となっており、今後の拡張に柔軟に対応できる。
-"""
 class Insula(BrainRegion):
+    """
+    Insula class models the neural mechanisms of empathy-based altruistic behavior.
+    
+    概要：
+    ----------------------------
+    - 島皮質（Insula）は、自己の身体状態と他者の感情状態を統合することで、
+      共感に基づく利他的行動を促進する脳領域。
+    - 本クラスは、観察された痛み信号（他者の苦痛）と自己の内部状態（例：自身の痛み、ストレス）を統合し、
+      扁桃体への情動出力として共感強度を生成する。
+    - 短期記憶（STP）と長期記憶（LTP）を用いて、共感反応の学習と蓄積を可能にする。
+    - 将来的な拡張として、強化学習、社会的文脈の統合、時間的変化の追跡などに対応可能。
+    
+    主な機能：
+    ----------------------------
+    - 観察された痛み信号に基づく共感処理
+    - 内部状態（自身の痛み、ストレスなど）との統合
+    - 共感強度の調整と扁桃体への出力
+    - STP（短期共感記憶）とLTP（長期共感記憶）の更新
+    - 拡張性の高いアーキテクチャ設計
+    
+    拡張ポイント：
+    ============================
+    
+    1. 強化学習による共感重みの調整：
+       - empathy_weights を報酬に基づいて動的に更新し、社会的報酬に応じた共感反応を学習。
+       - 例：
+         ```python
+         reward = social_feedback.get('altruism_reward', 0.0)
+         self.empathy_weights['pain'] += alpha * (reward - self.empathy_weights['pain'])
+         ```
+    
+    2. 時系列共感応答の追跡：
+       - 共感反応を時間軸で記録し、共感の持続性や変化をモデル化。
+       - 例：
+         ```python
+         self.empathy_history.append((timestamp, empathy_output))
+         ```
+    
+    3. 社会的文脈の統合：
+       - social_context に「関係性」「集団所属」「親密度」などを含め、共感強度を調整。
+       - 例：
+         ```python
+         familiarity = social_context.get('familiarity', 1.0)
+         empathy_signal *= familiarity
+         ```
+    
+    4. 扁桃体・前頭前野との接続：
+       - 扁桃体への情動出力、前頭前野による行動制御との連携を設計。
+       - 例：
+         ```python
+         amygdala_input = self.process(...)  # 情動強度
+         prefrontal_modulation = prefrontal_cortex.decide_action(amygdala_input)
+         ```
+    
+    5. 共感カテゴリの拡張：
+       - pain, distress 以外にも「羞恥」「罪悪感」「感謝」などの高次共感カテゴリを追加。
+       - 例：
+         ```python
+         self.empathy_weights['guilt'] = 1.0
+         ```
+    
+    6. 実験データとの整合性：
+       - fMRI、皮膚電気反応、表情認識などの生理・行動データと対応する共感強度の調整。
+       - 例：
+         ```python
+         if internal_state.get('SCR') > threshold:
+             empathy_output *= 1.2
+         ```
+    
+    このクラスは、神経科学的に忠実な共感処理モデルとして、社会的・倫理的・文化的な文脈を含む
+    高度な利他行動の生成に対応可能な設計となっており、今後の拡張に柔軟に対応できる。
+    """
+
     def __init__(self, name="Insula"):
         super().__init__(name)
         self.empathy_weights = {
