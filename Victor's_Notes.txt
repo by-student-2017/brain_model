@@ -609,24 +609,24 @@ n次元の物体同士は、n+2次元空間で結び目を作る
 ----------------------------------------------------------------------------------------------------
 
 ----------------------------------------------------------------------------------------------------
-INU Transform Axiom System (Draft)
+INU Framework Axiom System (Draft)
 ----------------------------------------------------------------------------------------------------
 
-This document outlines a proposed axiom system for the INU transform, which models semantic transformations between input and output representations. The system is based on four core axioms:
+This document presents a formal axiom system that defines the INU Framework (Intuitive Numerical Unification), which models semantic transformations between input and output representations. The framework is built upon four core axioms, each contributing to the structure and interpretability of semantic mappings. Among these, the Approximate Identity Mapping axiom serves as a foundational principle that ensures near-reversibility of semantic transformations.
 
 1. Approximate Identity Mapping
 -------------------------------
 Definition:
 Let f: X -> Z and g: Z -> X' be mappings such that for any x in X, the composition g(f(x)) approximates x.
-Formally: d(x, g(f(x))) < ε
+Formally: d(x, g(f(x))) < epsilon
 
 Explanation:
-This axiom ensures that the transformation from input x to semantic space z and back to reconstructed input x' preserves the original meaning within a small margin ε. It models the near-reversibility of semantic encoding and decoding.
+This axiom ensures that the transformation from input x to semantic space z and back to reconstructed input x' preserves the original meaning within a small margin epsilon. It models the near-reversibility of semantic encoding and decoding and is a core component of the INU Framework.
 
 2. Semantic Continuity
 ----------------------
 Definition:
-For all x1, x2 in X, if d(x1, x2) < δ then d(f(x1), f(x2)) < ε
+For all x1, x2 in X, if d(x1, x2) < delta then d(f(x1), f(x2)) < epsilon
 
 Explanation:
 This axiom guarantees that small changes in the input space X result in small changes in the semantic space Z. It enforces the continuity of the semantic mapping and ensures that similar inputs have similar semantic representations.
@@ -649,13 +649,13 @@ This axiom incorporates external signals S into the transformation process via p
 
 Summary
 -------
-These axioms aim to formalize the INU transform with the following principles:
-- Approximate reversibility
+These axioms collectively formalize the INU Framework with the following principles:
+- Approximate reversibility (via Approximate Identity Mapping)
 - Semantic continuity
 - Uniqueness and fidelity
 - Integration of external signals
 
-Each axiom contributes to a robust and interpretable transformation framework.
+Each axiom contributes to a robust and interpretable transformation framework that underpins the INU approach to semantic modeling.
 
 ----------------------------------------------------------------------------------------------------
 End of Draft
