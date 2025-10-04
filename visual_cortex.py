@@ -138,6 +138,10 @@ class VisualCortex(BrainRegion):
           脳科学は、この“間違える葦”としての人間の本質を、注意資源の限界と予測モデルの選択性から明らかにしつつある。
           この認識は、視覚皮質の構造的限界と注意の選択性に基づいており、
           本モジュールはその限界を理解し、再現することで、より安全かつ意味的に頑健なAI視覚処理の設計に資する。
+          
+          「人間に完璧を求めることは、虹の元に行こうとするようなものだ。見えてはいるが、構造的に到達できない。
+          脳科学は、人間が注意の限界と予測の選択性を持つ“間違える葦”であることを明らかにしつつあり、
+          理想の追求が誤りを許容する構造の理解なしには成立しないことを示している。」
         """
         # Current implementation: simple activation based on average visual signal
         return np.mean(image_signal) * neurotransmitters.get('glutamate', 1.0)
