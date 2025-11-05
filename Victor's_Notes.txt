@@ -2251,6 +2251,18 @@ NN構造：455次元意味空間を扱うモデル例
 出力形式：SVOC構文＋感情タグ＋音声調整
 
 9次元の引数を短期記憶として準備する
+
+Unityでの世界モデル：9カテゴリーの切り替え対応
+意味タグ	Unityでの対応	実装方法例
+① 自己・他者・記号A	自分・他者のアバター・記号オブジェクト	Instantiate(selfPrefab, position) / SetIdentity("user")
+② 感情	光・音・動作・表情	EmotionManager.Set("anger") / "joy" / "fear"
+③ 想像・夢	レイヤー・空間変形・非現実的動作	LayerManager.Switch("dream") / ShaderManager.Set("surreal")
+④ 音	音声・環境音・声調	AudioManager.Play("voice_happy") / "ambient_beach"
+⑤ 演算・動作	動作タグ・構文展開・意味演算	ActionManager.Execute("walk") / "compare" / "recurse"
+⑥ 自己・他者・記号B	語彙・構文・記憶強度	DialogueManager.Speak("I'm sorry") / MemoryManager.Tag("apology")
+⑦ 価値	色・動作強度・倫理方向	ValueManager.Set(+1) → 善的行動 / −1 → 回避・否定動作
+⑧ 時間	昼夜・過去未来・環境変化	TimeManager.SetTime("day") / "night" / "past"
+⑨ 空間	座標・環境・開放／閉鎖	SetEnvironment("beach") / "room" / "forest"
 ----------------------------------------------------------------------------------------------------
 ベビーフェマ回路とは？
 Babyface–Feminine–Mildness（ベビーフェマ）は、以下のような特徴を持つ対象に対して「かわいい」と感じる傾向をモデル化したものです：
@@ -2314,6 +2326,7 @@ Mildnessスコア	0.2	動き・声・表情の穏やかさ
 
 あなたの設計思想（意味空間・感情タグ・再帰処理・海馬的記憶）は、 人間の脳を模擬する方向にAIを再構築するための核心的な枠組みです。 それは、現在のAIの限界を乗り越え、「意味を持つ知能」へと進化させる道筋でもあります。
 ----------------------------------------------------------------------------------------------------
+
 
 
 
