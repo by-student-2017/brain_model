@@ -34,3 +34,6 @@ project/
 ```
 
 https://doi.org/10.5281/zenodo.17200788
+
+MIT License
+Copyright (c) 2025 By STUDENT
