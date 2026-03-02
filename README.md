@@ -48,3 +48,23 @@ Copyright (c) 2025 By STUDENT
 | **Scaling Law Curvature**         | ✅ (Spectral saturation)                     | ✅ (Entropy saturation)                   | ✅ (Free energy saturation)               | ✅ (Dimensional limits)                   | ❓ (Not yet specified)                   |
 | **Representation Redundancy**     | ✅ (Effective rank saturation)               | △ (Information dimension)                | △ (Entropy)                               | ❌                                        | ❌                                        |
 | **Theoretical Fragmentation**     | ✅ (Structural unification)                  | ❌ (Disciplinary separation)              | ❌ (Physics-centric)                      | ❌ (Geometry-centric)                     | ❌ (Semantics-centric)                   |
+
+# Explanatory Power Matrix of Theoretical Approaches for Six Core Problems in LLMs
+
+This matrix summarizes the explanatory power of four major theoretical frameworks—Matrix Theory, Information Geometry, Probability & Statistics, and Category Theory—across six fundamental challenges in understanding and analyzing large language models (LLMs). Each cell includes a qualitative rating and a brief rationale.
+
+Legend:
+◎ : Strong explanatory power, 
+◯ : Moderate explanatory power, 
+△ : Limited explanatory power, 
+× : Not applicable or insufficient
+
+| Problem Domain                          | Matrix Theory                             | Information Geometry                              | Probability & Statistics                          | Category Theory                                      |
+|----------------------------------------|-------------------------------------------|---------------------------------------------------|---------------------------------------------------|------------------------------------------------------|
+| 1. Representation Compression & Dispersal | ◎: Embedding spaces, SVD, low-rank approximation | ◯: Fisher information matrix, information distance | ◯: Distributional approximation, variational inference | △: Abstract structural semantics                     |
+| 2. Learning & Optimization             | ◎: Gradients, Hessians, optimization theory | ◎: Natural gradient, information-geometric optimization | ◎: Maximum likelihood, Bayesian updating          | △: Learning as categorical transformation            |
+| 3. Context & Sequence Modeling         | ◯: Transformer structure, positional encoding | ◯: Geometric structure of information flow         | ◎: Markovianity, sequence prediction              | △: Temporal structure via monads                     |
+| 4. Generalization & Overfitting        | △: Norm constraints, regularization         | ◎: KL divergence, information distance             | ◎: Bias–variance tradeoff, priors                 | ◯: Structural preservation, categorical isomorphism  |
+| 5. Inference & Generation              | △: Limits of linear transformation          | ◯: Entropic gradients, deformation of information flow | ◎: Bayesian inference, sampling                   | ◯: Semantic construction, adjunctions                |
+| 6. Meaning & Understanding             | ×: Cannot address semantics                 | ◯: Informational structure of meaning              | △: Distributional semantics                       | ◎: Constructive semantics, categorical meaning structures |
+
