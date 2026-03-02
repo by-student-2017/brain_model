@@ -37,3 +37,14 @@ https://doi.org/10.5281/zenodo.17200788
 
 MIT License
 Copyright (c) 2025 By STUDENT
+
+## Explanatory Power of Theoretical Frameworks for Structural Phenomena in LLMs (Excerpt)
+
+| Phenomenon / Theory Viewpoint       | Matrix Structural Theory                     | Information Geometry                     | Statistical Mechanics                    | Topology                                 | SQFT (Semantic QFT)                      |
+|------------------------------------|----------------------------------------------|------------------------------------------|------------------------------------------|------------------------------------------|------------------------------------------|
+| **Rank Collapse**                  | ✅ Complete match (low-rank constraints)      | ✅ (Fisher rank)                          | ✅ (Free energy minimization)             | ✅ (Dimensional degeneration)             | ✅ (Spectral reorganization)             |
+| **Covariance Cutting**            | ✅ (Off-diagonal suppression)                | ✅ (Fisher matrix block structure)        | ✅ (Correlation length decay)             | ✅ (Strata disconnection)                 | ✅ (Gauge curvature)                     |
+| **Modular Specialization**        | ✅ (Block decomposition)                     | ✅ (Mixture singularities)                | ✅ (Order parameters)                     | ✅ (Strata separation)                    | ✅ (Semantic condensation)               |
+| **Scaling Law Curvature**         | ✅ (Spectral saturation)                     | ✅ (Entropy saturation)                   | ✅ (Free energy saturation)               | ✅ (Dimensional limits)                   | ❓ (Not yet specified)                   |
+| **Representation Redundancy**     | ✅ (Effective rank saturation)               | △ (Information dimension)                | △ (Entropy)                               | ❌                                        | ❌                                        |
+| **Theoretical Fragmentation**     | ✅ (Structural unification)                  | ❌ (Disciplinary separation)              | ❌ (Physics-centric)                      | ❌ (Geometry-centric)                     | ❌ (Semantics-centric)                   |
